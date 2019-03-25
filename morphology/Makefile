@@ -12,7 +12,9 @@ BIN=\
 	make-se\
 	labeling\
 	dilation\
-	erosion
+	erosion\
+	opening\
+	closing
 
 .PHONY: all
 all: $(OBJ) $(BIN)
@@ -21,6 +23,8 @@ morphology.o: se.o
 make-se: se.o
 dilation: morphology.o se.o
 erosion: morphology.o se.o
+opening: morphology.o se.o
+closing: morphology.o se.o
 
 .PHONY: extract-gear
 extract-gear:

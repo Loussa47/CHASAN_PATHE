@@ -21,8 +21,7 @@ process(int s, int hs, pnm ims, pnm imd,
 {
   pnm shape = se(s, hs);
   pnm_save(shape,PnmRawPpm,"shape.ppm");
-
-  printf("shape : %d \n",s);
+  
   unsigned short * pixel_shape = pnm_get_channel(shape,NULL,0);
 
   unsigned short * channel = pnm_get_channel(ims, NULL, 0);
@@ -42,13 +41,13 @@ process(int s, int hs, pnm ims, pnm imd,
       j = index/cols;
 
       i_shape = 0;
-      tmp = channel[i*rows+j];
-      for(int h_i = -hs ; h_i <= +hs ; h_i++){
+      tmp = channel[index];
+      for(int h_i = -hs ; h_i <= hs ; h_i++){
         j_shape = 0;
-        for(int h_j = +hs ; h_j >= -hs ; h_j--){
-          if(h_i >= 0 && h_i < cols && h_j>= 0 && h_j < rows){
+        for(int h_j = -hs ; h_j <= hs ; h_j++){
+          if(i + h_i >= 0 && i + h_i < cols && j + h_j>= 0 && j + h_j < rows){
               if(pixel_shape[i_shape*(2*hs+1) +j_shape] == 255){
-                pf(&(channel[h_i*rows+h_j]),&tmp);
+                pf(&(channel[(h_i + i) + cols * (h_j + j)]),&tmp);
               }
           }
           j_shape++;
@@ -56,7 +55,7 @@ process(int s, int hs, pnm ims, pnm imd,
         i_shape++;
 
       }
-      channel_out[i*rows+j] = tmp;
+      channel_out[index] = tmp;
 
 
   }
