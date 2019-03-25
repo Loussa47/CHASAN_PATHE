@@ -14,7 +14,9 @@ BIN=\
 	dilation\
 	erosion\
 	opening\
-	closing
+	closing\
+	add\
+	substract
 
 .PHONY: all
 all: $(OBJ) $(BIN)
@@ -25,6 +27,8 @@ dilation: morphology.o se.o
 erosion: morphology.o se.o
 opening: morphology.o se.o
 closing: morphology.o se.o
+add: morphology.o se.o
+substract: morphology.o se.o
 
 .PHONY: extract-gear
 extract-gear:
