@@ -21,7 +21,7 @@ se(int s, int hs){
   else if (s == DIAMOND){
     for (int i = 0; i < cols; i++){
       for (int j = 0; j < rows; j++){
-        if (abs(i-hs)+abs(hs-j)< hs){
+        if (abs(i-hs)+abs(hs-j)<= hs){
           pix[i*rows+j] = 255;
         }
       }
@@ -30,7 +30,7 @@ se(int s, int hs){
   else if (s == DISK){
     for (int i = 0; i < cols; i++){
       for (int j = 0; j < rows; j++){
-        if (sqrt((i-hs)*(i-hs)+(hs-j)*(hs-j))< hs){
+        if (sqrt((i-hs)*(i-hs)+(hs-j)*(hs-j))<= hs){
           pix[i*rows+j] = 255;
         }
       }

@@ -17,7 +17,7 @@ main(int argc, char* argv[])
   if(argc != PARAM+1) usage(argv[0]);
   pnm in = pnm_load(argv[3]);
   pnm out = pnm_new(pnm_get_width(in),pnm_get_height(in), PnmRawPpm);
-  process(atoi(argv[1]), atoi(argv[2]), in, out, maximum);
+  process(atoi(argv[1]), atoi(argv[2]), in, out, minimum);
 
 
   pnm_save(out,PnmRawPpm,argv[4]);

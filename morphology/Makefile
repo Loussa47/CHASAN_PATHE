@@ -1,8 +1,8 @@
 ROOT=../bcl
 
 CPPFLAGS = -I$(ROOT)/include -I.
-CFLAGS   = -Wall -Wextra -Werror -pedantic -std=c99 
-LDFLAGS  = -L$(ROOT)/lib 
+CFLAGS   = -Wall -Wextra -Werror -pedantic -std=c99
+LDFLAGS  = -L$(ROOT)/lib
 LDLIBS   = -lbcl -lm
 
 VIEWER = pvisu
@@ -11,14 +11,16 @@ DATA   = ../data
 BIN=\
 	make-se\
 	labeling\
-	dilation
+	dilation\
+	erosion
 
 .PHONY: all
 all: $(OBJ) $(BIN)
 
 morphology.o: se.o
 make-se: se.o
-dilation: morphology.o
+dilation: morphology.o se.o
+erosion: morphology.o se.o
 
 .PHONY: extract-gear
 extract-gear:
@@ -44,4 +46,3 @@ clean:
 	$(RM) *.o *.ppm
 cleanall: clean
 	$(RM) $(BIN)
-
