@@ -9,7 +9,7 @@
 
 #include <pnm.h>
 #include <memory.h>
- 
+
 int _find(int p, int* roots)
 {
   while(roots[p]!=p) p=roots[p];
@@ -26,24 +26,25 @@ int _union(int r0, int r1, int* roots)
     return r0;
   }else{
     roots[r0]=r1;
-    return r1;  
+    return r1;
   }
 }
 
 int _add(int p, int r, int* roots)
 {
-  if(r==-1) 
+  if(r==-1)
     roots[p]=p;
-  else 
+  else
     roots[p]=r;
   return roots[p];
 }
- 
-void 
+
+void
 process(pnm ims){
   int             w     = pnm_get_width(ims);
-  int             h     = pnm_get_height(ims);  
+  int             h     = pnm_get_height(ims);
   unsigned short *ps    = pnm_get_channel(ims, NULL, PnmRed);
+  unsigned short *tmp = ps;
   int             p     = 0;
   int             r     = -1;
   int            *roots = memory_alloc(w*h*sizeof(int));
@@ -53,18 +54,18 @@ process(pnm ims){
       r = -1;
       if( j>0 && (*(ps-1)==(*ps)) )
 	r = _union(_find(p-1, roots), r, roots);
-      if( (i>0 && j>0) && (*(ps-1-w)==(*ps)) ) 
+      if( (i>0 && j>0) && (*(ps-1-w)==(*ps)) )
 	r = _union(_find(p-1-w, roots), r, roots);
-      if( i>0 && (*(ps-w) == (*ps)) ) 
+      if( i>0 && (*(ps-w) == (*ps)) )
 	r = _union(_find(p-w, roots), r, roots);
       if( (j<(w-1) && i>0) && (*(ps+1-w)==(*ps)) )
 	r = _union(_find(p+1-w, roots), r, roots);
       r = _add(p, r, roots);
-      p++; 
-      ps++; 
+      p++;
+      ps++;
     }
   }
-  for(p=0; p<w*h; p++) 
+  for(p=0; p<w*h; p++)
     roots[p] = _find(p, roots);
   int l=0;
   for(p=0; p<w*h; p++){
@@ -73,6 +74,8 @@ process(pnm ims){
     else
       roots[p] = roots[roots[p]];
   }
+
+  ps = tmp;
 
   fprintf(stderr, "labeling: %d components found\n", l);
   memory_free(roots);
@@ -90,7 +93,7 @@ usage(char* s)
 int
 main(int argc, char* argv[])
 {
-  if(argc != PARAM+1) 
+  if(argc != PARAM+1)
     usage(argv[0]);
   pnm pnm_ims = pnm_load(argv[1]);
   process(pnm_ims);

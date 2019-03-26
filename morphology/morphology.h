@@ -3,7 +3,7 @@
 
 /**
  *  @file  morphology.h
- *  @brief header for morphology.c that implements functions 
+ *  @brief header for morphology.c that implements functions
  *         for mathematical morphology
  *         image processing
  *	   A structuring element is viewed as a pnm binary image file : 0 for
@@ -15,7 +15,7 @@
 
 /**
  * @brief  compute a morphological dilation or erosion on a grayscale image
- *         with a given structuring element. Dilation or erosion 
+ *         with a given structuring element. Dilation or erosion
  *         processing depends on an order function  defined by the pointer pf
  * @param  shape: the structing element shape umber
  * @param  halfsize: the structuring element halfsize
@@ -24,10 +24,10 @@
  * @param  pf: a pointer on a ordering function
  */
 void
-process(int shape, 
-	int halfsize, 
-	pnm ims, 
-	pnm imd, 
+process(int shape,
+	int halfsize,
+	pnm ims,
+	pnm imd,
 	void (*pf)(unsigned short*, unsigned short*));
 
 /**

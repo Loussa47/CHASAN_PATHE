@@ -20,8 +20,7 @@ process(int s, int hs, pnm ims, pnm imd,
         void (*pf)(unsigned short*, unsigned short*))
 {
   pnm shape = se(s, hs);
-  pnm_save(shape,PnmRawPpm,"shape.ppm");
-  
+
   unsigned short * pixel_shape = pnm_get_channel(shape,NULL,0);
 
   unsigned short * channel = pnm_get_channel(ims, NULL, 0);
