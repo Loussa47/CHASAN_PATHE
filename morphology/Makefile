@@ -33,6 +33,10 @@ substract: morphology.o se.o
 .PHONY: extract-gear
 extract-gear:
 	$(VIEWER) $(DATA)/gear.ppm
+	./opening 2 20 $(DATA)/gear.ppm a.ppm
+	$(VIEWER) a.ppm
+	./substract $(DATA)/gear.ppm a.ppm b.ppm
+	$(VIEWER) b.ppm
 
 .PHONY: morphology-mrg morphology-lex morphology-bit
 morphology-mrg: se.o
