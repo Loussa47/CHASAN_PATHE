@@ -66,6 +66,6 @@ process(int s, int hs, pnm ims, pnm imd,
 
   pnm_free(shape);
   free(pixel_shape);
-  free(channel);
+  free(channel); free(channel_out);
   puts(">> morphology.c");
 }
