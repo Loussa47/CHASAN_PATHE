@@ -17,7 +17,8 @@ BIN=\
 	closing\
 	add\
 	substract\
-	binarization
+	binarization\
+	labeling-color
 
 .PHONY: all
 all: $(OBJ) $(BIN)
@@ -38,7 +39,9 @@ extract-gear:
 	$(VIEWER) a.ppm
 	./substract $(DATA)/gear.ppm a.ppm b.ppm
 	$(VIEWER) b.ppm
-	./binarization 200 255 b.ppm result.ppm
+	./binarization 200 255 b.ppm c.ppm
+	$(VIEWER) c.ppm
+	./labeling-color c.ppm result.ppm
 	$(VIEWER) result.ppm
 
 .PHONY: morphology-mrg morphology-lex morphology-bit
