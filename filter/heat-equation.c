@@ -76,18 +76,17 @@ process(int n, char *ims, char *imd)
     tmp = channel_prev;
     channel_prev = channel_next;
     channel_next = tmp;
+
   }
 
   for(int i = 0 ; i < cols ; i++){
     for(int j = 0 ; j < rows ; j++){
       channel_in[i*rows+j] = channel_prev[i*rows+j];
-
       //Normalisation
       if(channel_in[i*rows+j] > 255) channel_in[i*rows+j] = 255;
 
     }
   }
-
 
   pnm_set_channel(out, channel_in,0);
   pnm_set_channel(out, channel_in,1);
